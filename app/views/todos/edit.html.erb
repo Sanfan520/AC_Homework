@@ -1,0 +1,4 @@
+<%# :url=> todos_path, method=> :post / 連動到create action;  url=>todos_path  代表將表單資料送去哪 %>
+
+<%# 將 new & edit 共通的 form 取出製成 partial，並將按鈕顯示的文字當成參數傳進去 %>
+<%= render partial: 'form', locals: { button: 'UPDATE' } %>

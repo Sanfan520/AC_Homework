@@ -1,0 +1,40 @@
+<div class="container">
+  <table class="table table-striped table-condensed">
+    <tr>
++     <td>Status</td>
+      <td>Title</td>
+      <td>Due_date</td>
+      <td>Note</td>
+      <td>Show</td>
+      <td>Edit</td>
+      <td>Destroy</td>
+
+   <% @todos.each do |todo| %>
+   <%# tr 裡面的td由左而右列出來 換行再用tr%>
+  <%#因為 remote: true 的緣故這個checkbox 在被點擊時會自動打一個request到設定的 data-url 再來就是執行status action做的事情%>
+     <tr>
+      <td>
+         <%# check_box_tag('check_box_name')  todo.check todo.check抓資料庫那裡todo的check值，預設為true，如果是true就會有打勾狀態，如果是false就不會打勾 %>
+         <%= check_box_tag :status, todo.status, true, data: { url: status_todo_path(todo), method: :post, remote: true } %>
+      </td>
+      <td><%= todo.task %> <%# 呼叫這個todo物件的所有task名稱 %></td>
+      <td><%= todo.due_date %>
+      <td><%= todo.note %>
+      <td><button class="btn btn-default" ><%= link_to 'Show', todo_path(todo) %></td>
+      <td><button type="button" class="btn btn-success"><%= link_to 'Edit', edit_todo_path(todo) %></td>
+      <td>
+        <% if todo.due_date.past? %>
+         <a class="btn btn-danger disabled">delete</a>
+        <% else %>
+         <%=link_to("delete",todo_path(todo),class:"btn btn:danger", method: :delete, data:{confirm:"Are you sure?"}) %>
+        <% end %>
+        </td>
+      <%# <% if todo.due_date > Date.today  %>
+      <%#  <%= link_to 'Destroy', todo_path(todo), method: :delete, data:{ confirm: "Are you sure?" } %>
+      <%#< % else %>
+      <%#  <%= "Overdue" %>
+      <%# <% end %>
+
+ <% end %>
+
+<button type="button" class="btn btn-warning"><%= link_to 'New Todo', new_todo_path %>
