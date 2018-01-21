@@ -32,23 +32,18 @@ class TodosController < ApplicationController
         end
       end
 
-      # 下面只寫了 def show; end  =>彷彿沒有內容，是因為原先此 action 內的代碼:
-      # @todo = Todo.find(params[:id])
-      # 此行的作用已被 before_action :find_todo 取代
-      def show; end
 
-      # 下面只寫了 def edit; end彷彿沒有內容，是因為原先此 action 內的代碼:
-      # @todo = Todo.find(params[:id])
-      # 此行的作用已被 before_action :find_todo 取代
-      def edit; end
+      def show;
+      end
+
+      def edit;
+      end
 
       def update
-        # 下面此行的作用已被 before_action :find_todo 取代
-        # @todo = Todo.find(params[:id])
-
+        # before_action :find_todo 取代
         # 如果驗證成功，則更新，並回到列表頁，告知成功更新
         # 如果驗證失敗，則不更新，並保留已填寫資訊，回到 edit，繼續填寫
-        if @todo.update(todo_params)
+        if @todo.update_attributes(todo_params)
           # 跳出通知訊息，告知成功更新  flash[:notice] = 'List was successfully updated !!'
           # 重新發出 request，導往列表頁。對瀏覽器來說會重整頁面
           redirect_to todos_path
