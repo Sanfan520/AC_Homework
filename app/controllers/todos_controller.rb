@@ -9,6 +9,8 @@ class TodosController < ApplicationController
 
       def status
          @todo.update(is_public: !(@todo.status))
+       #status: nil, !nil =>true
+       #is_public: true =>預設為true,代表預設為打勾   
       end
 
       def new

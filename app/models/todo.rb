@@ -1,3 +1,3 @@
 class Todo < ApplicationRecord
-  validates_presence_of :title, :due_date
+  validates_presence_of :task, :due_date
 end
