@@ -1,21 +1,54 @@
-<% if @todo.errors.present? %>
-  <ul>
-    <% @todo.errors.each do |error, message| %>
-      <li> <%= "#{error.capitalize}  #{message}" %></li>
-    <% end %>
-  </ul>
-<% end %>
+
+<div class="container">
+  <div class="header">
+    <h1>My ToDo List</h1>
+    <div class="info">
+      <div class="item">
+        <div class="inner"><p class="day">13</p></div>
+        <div class="inner">
+          <div class="top"><p class="week">SATURDAY</p></div>
+          <div class="bottom">
+            <p class="month-year">JULY,2019</p>
+          </div>
+        </div>
+      </div>
+      <div class="item"><i class="far fa-calendar-check"></i></div>
+    </div>
+  </div>
+
+   <% if @todo.errors.present? %>
+     <ul>
+       <% @todo.errors.each do |error, message| %>
+         <li> <%= "#{error.capitalize}  #{message}" %></li>
+       <% end %>
+     </ul>
+   <% end %>
+
 
 <%= form_for @todo do |f| %>
-  <%= f.label :task, "項目" %>
-  <%= f.text_field :task %>
+  <div class="form-group">
+  <%= f.label :task, "項目", class: "col-md-3 control-label" %>
+  <div class="col-md-7">
+    <%= f.text_field :task, class: "form-control" %>
+  </div>
 
-  <%= f.label :note, "內容" %>
-  <%= f.text_field :note %>
+  <div class="form-group">
+  <%= f.label :task, "內容", class: "col-md-3 control-label" %>
+  <div class="col-md-7">
+    <%= f.text_field :note, class: "form-control" %>
+  </div>
 
-  <%= f.label :due_date, "到期日"%>
-  <%= f.text_field :due_date %>
+  <div class="form-group">
+  <%= f.label :task, "到期日", class: "col-md-3 control-label" %>
+  <div class="col-md-7">
+    <%= f.text_field :due_date, class: "form-control" %>
+  </div>
 
-  <%= f.submit "送出"%>
-
-<% end %>
+  <div class="col-md-7">
+    <%= f.submit "送出"%>
+  </div>
+  <% end %>
+  <div class="col-md-7">
+   <%= link_to "Back to index", :back, class: "pull-right"%>
+  </div>
+</div>

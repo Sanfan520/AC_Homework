@@ -1,45 +1,80 @@
-<div class="container">
-  <table class="table table-striped table-condensed">
-    <tr>
-+     <td>Status</td>
-      <td>Title</td>
-      <td>Due_date</td>
-      <td>Note</td>
-      <td>Show</td>
-      <td>Edit</td>
-      <td>Destroy</td>
 
-   <% @todos.each do |todo| %>
+
+
+
+<div class="container">
+  <div class="header">
+    <h1>My ToDo List</h1>
+    <div class="info">
+      <div class="item">
+        <div class="inner"><p class="day">13</p></div>
+        <div class="inner">
+          <div class="top"><p class="week">SATURDAY</p></div>
+          <div class="bottom">
+            <p class="month-year">JULY,2019</p>
+          </div>
+        </div>
+      </div>
+      <div class="item"><i class="far fa-calendar-check"></i></div>
+    </div>
+  </div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <td>Status</td>
+        <td>Title</td>
+        <td>Due_date</td>
+        <td>Note</td>
+        <td>Show</td>
+        <td>Edit</td>
+        <td>Destroy</td>
+      </tr>
+    </thead>
+
+
+<% @todos.each do |todo| %>
+   <tr>
    <%# tr 裡面的td由左而右列出來 換行再用tr%>
   <%#因為 remote: true 的緣故這個checkbox 在被點擊時會自動打一個request到設定的 data-url 再來就是執行status action做的事情%>
-     <tr>
       <td>
          <%# check_box_tag('check_box_name')   todo.check抓資料庫那裡todo的check值，預設為true (status: nil)，如果是true就會有打勾狀態，如果是false就不會打勾 %>
          <%# status: nil, 在console打 !nil 會出現是true, url跟method就是打request的路徑與方法，remote: true會在使用者按下按鈕後打去設定的url與method的路徑。%>
          <%= check_box_tag :status, todo.status, true, data: { url: status_todo_path(todo), method: :post, remote: true } %>
       </td>
       <td><%= todo.task %> </td> <%# 呼叫這個todo物件的所有task名稱 %>
-      <td><%= todo.due_date %>
-      <td><%= todo.note %>
+      <td><%= todo.due_date %></td>
+      <td><%= todo.note %></td>
 
-      <td><button class="btn btn-default" ><%= link_to 'Show', todo_path(todo) %></td>
 
+<%# show button %>
+      <td><button class="btn btn-default" ><%= link_to '<i class="fa fa-file-alt fa-lg" aria-hidden="true"></i>'.html_safe, todo_path(todo)%></td>
+
+<%# Edit or disabled-edit button %>
       <td>
         <% if todo.due_date > Date.today  %>
-         <button type="button" class="btn btn-success"><%= link_to 'Edit', edit_todo_path(todo) %>
+         <button class="btn btn-default" ><%= link_to '<i class="fa fa-pen fa-lg" aria-hidden="true"></i>'.html_safe, edit_todo_path(todo) %>
         <% else %>
-         <a class="btn btn-danger disabled">Edit</a>
+         <button class="btn btn-default" ><i class="fa fa-pen fa-lg" aria-hidden="true" style="color:gray"></i>
         <% end %>
       </td>
 
+<%#<button class="btn btn-primary disabled" disable>%>
+<%# delete button %>
       <td>
-      <% if todo.due_date > Date.today  %>
-       <button type="button" class="btn btn-success"><%= link_to 'Destroy', todo_path(todo), method: :delete, data:{ confirm: "Are you sure?" } %>
-      <% else %>
-       <a class="btn btn-danger disabled">delete</a>
-      <% end %>
+        <% if todo.due_date > Date.today  %>
+         <button class="btn btn-default" ><%= link_to '<i class="fa fa-trash fa-lg" aria-hidden="true"></i>'.html_safe, todo_path(todo), method: :delete , data:{ confirm: "Are you sure?" } %>
+        <% else %>
+         <button class="btn btn-default" ><i class="fa fa-trash fa-lg" aria-hidden="true" style="color:gray"></i>
+        <% end %>
       </td>
- <% end %>
+
+<%#  <button class="btn btn-default" > this is bootstrap button style %>
+
+    <% end %>
+  </tr>
+</table>
+
 
 <%# Another way to write due_date=> .past
 <%# <% if todo.due_date.past? %>
@@ -47,6 +82,6 @@
     <% else %>
 <%#   <%=link_to("delete",todo_path(todo),class:"btn btn:danger", method: :delete, data:{confirm:"Are you sure?"}) %>
 <%#  <% end %>
- </td>
 
-<button type="button" class="btn btn-warning"><%= link_to 'New Todo', new_todo_path %>
+<i class="fa fa-plus fa-lg" aria-hidden="true"></i> <%= link_to 'New Todo', new_todo_path %>
+</div>

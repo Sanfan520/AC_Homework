@@ -1,4 +1,20 @@
 <div class="container">
+
+    <div class="header">
+      <h1>My ToDo List</h1>
+      <div class="info">
+        <div class="item">
+          <div class="inner"><p class="day">13</p></div>
+          <div class="inner">
+            <div class="top"><p class="week">SATURDAY</p></div>
+            <div class="bottom">
+              <p class="month-year">JULY,2019</p>
+            </div>
+          </div>
+        </div>
+        <div class="item"><i class="far fa-calendar-check"></i></div>
+      </div>
+
   <%= form_for @todo,:html => {:class => "form-horizontal center"} do |f| %>
   <div class="form-group">
     <%= f.label :task, "項目", class: "col-md-3 control-label" %>
@@ -19,12 +35,11 @@
     </div>
   </div>
   <div class="form-group">
-    <div class="col-md-3">
-      </div>
+    <div class="col-md-3"></div>
     <div class="col-md-7">
-
-   <%= link_to "Back to index", :back, class: "pull-right"%>
-   </div>
+     <%= link_to "Back to index", :back, class: "pull-right"%>
+    </div>
   </div>
  <% end %>
+ </div>
 </div>
